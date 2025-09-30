@@ -1,0 +1,24 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8686:8686"
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /app
+    hostname: backend
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "9696:9696"
+    depends_on:
+      - backend
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /app
